@@ -12,6 +12,7 @@ import SignInAndSignUpPage from '../pages/sign-in-and-sign-up/sign-in-and-sign-u
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { setCurrentUser } from '../redux/user/user.action';
 import { selectCurrentUser } from '../redux/user/user.selectors';
+import CheckoutPage from '../components/checkout/checkout.component';
 
 class App extends React.Component {
     // this is how you will unmount from Auth
@@ -42,13 +43,13 @@ class App extends React.Component {
     }
 
     render() {
-        console.log('what do I have: ', this.props.currentUser);
         return (
             <div>
                 <Header />
                 <Switch>
                     <Route exact path='/' component={HomePage} />
                     <Route path='/shop' component={ShopPage} />
+                    <Route exact path='/checkout' component={CheckoutPage} />
                     <Route exact path='/signin' render={() => (this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />)} />
                 </Switch>
             </div>

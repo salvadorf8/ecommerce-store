@@ -11,5 +11,6 @@ export const selectCartHidden = createSelector([selectCart], (cart) => cart.hidd
 
 export const selectCartItemsCount = createSelector([selectCartItems], (cartItems) => cartItems.reduce((theQuantity, cartItem) => theQuantity + cartItem.quantity, 0));
 
+export const selectCartTotal = createSelector([selectCartItems], (cartItems) => cartItems.reduce((theQuantity, cartItem) => theQuantity + cartItem.quantity * cartItem.price, 0));
 //reason for selector is so that the cart dropdown and icon will not be rerendered when we sign out which is
 // not related to the components.
