@@ -7,6 +7,8 @@ const selectCart = (state) => state.cart;
 // thus a memoized selector
 export const selectCartItems = createSelector([selectCart], (cart) => cart.cartItems);
 
+export const selectCartHidden = createSelector([selectCart], (cart) => cart.hidden);
+
 export const selectCartItemsCount = createSelector([selectCartItems], (cartItems) => cartItems.reduce((theQuantity, cartItem) => theQuantity + cartItem.quantity, 0));
 
 //reason for selector is so that the cart dropdown and icon will not be rerendered when we sign out which is
