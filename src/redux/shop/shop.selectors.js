@@ -1,16 +1,9 @@
 import { createSelector } from 'reselect';
 
-// map so when id are numbers but the apps values are string
-const COLLECTION_ID_MAP = {
-    hats: 1,
-    sneakers: 2,
-    jackets: 3,
-    womens: 4,
-    mens: 5
-};
+// map so when id are numbers but the apps values are string - this is called data normalization
 
 const selectShop = (state) => state.shop;
 
 export const selectCollections = createSelector([selectShop], (shop) => shop.collections);
 
-export const selectCollection = (collectionUrlParam) => createSelector([selectCollections], (collections) => collections.find((collection) => collection.id === COLLECTION_ID_MAP[collectionUrlParam]));
+export const selectCollection = (collectionUrlParam) => createSelector([selectCollections], (collections) => collections[collectionUrlParam]);
