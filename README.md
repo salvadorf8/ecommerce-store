@@ -1,6 +1,6 @@
 This project was formulated with Create React App
 
-## eCommerce Store
+## E-commerce Store
 
 In the project directory, you can run:
 
