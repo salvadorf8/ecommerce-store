@@ -6,6 +6,10 @@ import rootReducer from './root-reducer';
 
 const middlewares = [logger];
 
+if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
+}
+
 // we really dont need export on next two lines but oh well
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 

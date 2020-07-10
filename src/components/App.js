@@ -24,15 +24,12 @@ class App extends React.Component {
         //observer will always trigger listening to the auth, user will always be sent to page until they sign out
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
             if (userAuth) {
-                console.log('userAuth is not empty');
-
                 const userRef = await createUserProfileDocument(userAuth);
 
                 userRef.onSnapshot((snapShot) => {
                     setCurrentUser({ id: snapShot.id, ...snapShot.data() });
                 });
             } else {
-                console.log('userAuth did not have anything');
                 setCurrentUser(userAuth);
             }
         });
