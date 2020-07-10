@@ -1,4 +1,3 @@
-import './header.styles.scss';
 import React from 'react';
 import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
@@ -9,7 +8,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styled';
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles';
 
 const Header = ({ currentUser, hidden }) => (
     <HeaderContainer>
