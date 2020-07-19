@@ -21,11 +21,28 @@ class ShopPage extends React.Component {
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
 
-        this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async (snapshot) => {
+        // collectionRef.onSnapshot - is a firebase observable/observer pattern way
+        // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async (snapshot) => {
+        //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        //     updateCollections(collectionsMap);
+        //     this.setState({ loading: false });
+        // });
+
+        // .get().then() - is a promise based pattern way
+        // difference is we are no longer leveraging when data changes in firebase
+
+        // below is a actually a working promise based pattern - without levereging the firebase pattern
+        collectionRef.get().then((snapshot) => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             updateCollections(collectionsMap);
             this.setState({ loading: false });
         });
+
+        // below is a full fledge promise based pattern
+        // document resource - https://firebase.google.com/docs/firestore/use-rest-api#making_rest_calls
+        // fetch('https://firestore.googleapis.com/v1/projects/ecommerce-db-5aa0e/databases/(default)/documents/collections')
+        //     .then((response) => response.json())
+        //     .then((collections) => console.log(collections));
     }
 
     componentWillUnmount() {}
