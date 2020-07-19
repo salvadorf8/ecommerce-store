@@ -9,10 +9,12 @@ import HomePage from '../pages/homepage/home-page.component';
 import ShopPage from '../pages/shop/shop.component';
 import Header from './header/header.component';
 import SignInAndSignUpPage from '../pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { setCurrentUser } from '../redux/user/user.action';
 import { selectCurrentUser } from '../redux/user/user.selectors';
 import CheckoutPage from '../components/checkout/checkout.component';
+import { selectCollectionsForPreview } from '../redux/shop/shop.selectors';
 
 class App extends React.Component {
     // this is how you will unmount from Auth
@@ -55,7 +57,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProp = (dispatch) => ({

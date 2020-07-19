@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore'; // for DB
 import 'firebase/auth'; // for authentication
+import 'firebase';
 
 const config = {
     apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
@@ -12,33 +13,85 @@ const config = {
     appId: `${process.env.REACT_APP_FIREBASE_APP_ID}`
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) {
         return;
     }
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
-    const snapShot = await userRef.get();
+    const userDocRef = firestore.doc(`users/${userAuth.uid}`);
+    // console.log({ userDocRef });
 
-    if (snapShot.exists) {
-        return userRef;
+    const userDocSnapshot = await userDocRef.get();
+    // console.log('this works: ', userDocSnapshot.id, ' - ', userDocSnapshot.data());
+
+    // const userCollectionRef = firestore.collection('users');
+    // const userCollectionSnapshot = await userCollectionRef.get();
+    // console.log('is not working: ', { userCollectionSnapshot });
+    // console.log('this works: ', { collection: userCollectionSnapshot.docs.map((doc) => doc.data()) });
+
+    if (userDocSnapshot.exists) {
+        const accessed = new Date();
+
+        try {
+            await userDocRef.update({ accessed });
+        } catch (error) {
+            console.log('error creating user in DB: ', error.message);
+        }
+
+        return userDocRef;
     }
 
-    console.log('user does not exist in DB - lets save');
-
+    // if user does not exist, then create a new record and store it
     const { displayName, email } = userAuth;
-    const createdAt = new Date();
+    const created = new Date();
 
     try {
-        await userRef.set({ displayName, email, createdAt, ...additionalData });
+        await userDocRef.set({ displayName, email, created, ...additionalData });
     } catch (error) {
         console.log('error creating user in DB: ', error.message);
     }
 
-    return userRef;
+    return userDocRef;
 };
 
-firebase.initializeApp(config);
+// temporary to add data onetime so we dont have to do this manually
+// export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+//     const collectionRef = firestore.collection(collectionKey);
+//     console.log('objects to add: ', objectsToAdd);
+
+//     const batch = firestore.batch();
+//     objectsToAdd.forEach((obj) => {
+//         //give me a new document reference  and give me a new ID
+//         const newDocRef = collectionRef.doc();
+//         batch.set(newDocRef, obj);
+//     });
+
+//     return await batch.commit();
+// };
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map((docSnapshot) => {
+        const { title, items } = docSnapshot.data();
+
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            routeName2: title.toLowerCase(),
+            id: docSnapshot.id,
+            title,
+            items
+        };
+    });
+
+    console.log(transformedCollection);
+
+    console.log('here we go');
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    }, {});
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

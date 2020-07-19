@@ -8,6 +8,6 @@ const selectShop = (state) => state.shop;
 export const selectCollections = createSelector([selectShop], (shop) => shop.collections);
 
 // since Array was converted to Object, coded this because Object.keys will return an array of objects so app will continue to work
-export const selectCollectionsForPreview = createSelector([selectCollections], (collections) => Object.keys(collections).map((key) => collections[key]));
+export const selectCollectionsForPreview = createSelector([selectCollections], (collections) => (collections ? Object.keys(collections).map((key) => collections[key]) : []));
 
-export const selectCollection = (collectionUrlParam) => createSelector([selectCollections], (collections) => collections[collectionUrlParam]);
+export const selectCollection = (collectionUrlParam) => createSelector([selectCollections], (collections) => (collections ? collections[collectionUrlParam] : null));
