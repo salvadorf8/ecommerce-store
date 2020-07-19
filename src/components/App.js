@@ -23,8 +23,11 @@ class App extends React.Component {
     componentDidMount() {
         const { setCurrentUser } = this.props;
 
-        //observer will always trigger listening to the auth, user will always be sent to page until they sign out
+        // observer will always trigger a listener to the auth, user will always be sent to page until they sign out
+        // below is an example of - observable/observer pattern - using the firebase library
+        // onAuthStateChanged is known as an observable - which continuously fires off events that occur
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+            // the function code here is our subscription asking the observable to fire when a particular event occurs
             if (userAuth) {
                 const userRef = await createUserProfileDocument(userAuth);
 
@@ -38,6 +41,7 @@ class App extends React.Component {
     }
 
     componentWillUnmount() {
+        // unsubscribing here is basically saying: observable, we no longer need the subscription, lets get rid of it
         this.unsubscribeFromAuth();
     }
 
