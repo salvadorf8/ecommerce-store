@@ -4,9 +4,10 @@ import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
-import { fetchCollectionsStart } from './shop/shop.sagas';
+// import { fetchCollectionsStart } from './shop/shop.sagas';
 
 import rootReducer from './root-reducer';
+import rootSaga from './root.sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 // we really dont need export on next two lines but oh well
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-sagaMiddleware.run(fetchCollectionsStart);
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
 
