@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CollectionItemContainer = styled.div`
+export const ItemContainer = styled.div`
     width: 22vw;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@ export const CollectionItemContainer = styled.div`
     }
 `;
 
-export const BackgroundImage = styled.div`
+export const Img = styled.div`
     width: 100%;
     height: 95%;
     background-size: cover;
@@ -29,7 +29,7 @@ export const BackgroundImage = styled.div`
     background-image: url(${({ src }) => src});
 `;
 
-export const CollectionFooter = styled.div`
+export const Content = styled.div`
     width: 100%;
     height: 5%;
     display: flex;
@@ -47,12 +47,12 @@ export const CollectionFooter = styled.div`
     }
 `;
 
-export const NameContainer = styled.span`
+export const Name = styled.span`
     width: 90%;
     margin-bottom: 15px;
 `;
 
-export const PriceContainer = styled.span`
+export const Price = styled.span`
     width: 10%;
     margin-bottom: 15px;
 `;

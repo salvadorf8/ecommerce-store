@@ -10,7 +10,7 @@ const getAdditionalStyles = (props) => {
     }
 };
 
-export const MenuItemContainer = styled.div`
+export const ItemContainer = styled.div`
     min-width: 30%;
     height: 340px;
     flex: 1 1 auto;
@@ -32,7 +32,7 @@ export const MenuItemContainer = styled.div`
     ${getAdditionalStyles}
 `;
 
-export const BackgroundImage = styled.div`
+export const Img = styled.div`
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -46,7 +46,7 @@ export const BackgroundImage = styled.div`
     }
 `;
 
-export const ContentContainer = styled.div`
+export const Button = styled.div`
     height: 90px;
     padding: 0 25px;
     display: flex;
@@ -64,14 +64,14 @@ export const ContentContainer = styled.div`
     }
 `;
 
-export const ContentTitle = styled.h1`
+export const Title = styled.h1`
     font-weight: bold;
     margin-bottom: 6px;
     font-size: 22px;
     color: #4a4a4a;
 `;
 
-export const ContentSubtitle = styled.span`
+export const Subtitle = styled.span`
     font-weight: lighter;
     font-size: 16px;
 `;
