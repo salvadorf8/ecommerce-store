@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore'; // for DB
 import 'firebase/auth'; // for authentication
-import 'firebase';
+// import 'firebase'; // commented because got a google warning message to only import what I'm using (above two lines of code)
 
 const config = {
     apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
@@ -45,10 +45,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     // if user does not exist, then create a new record and store it
     const { displayName, email } = userAuth;
-    const created = new Date();
+    additionalData = { ...additionalData, created: new Date() };
 
     try {
-        await userDocRef.set({ displayName, email, created, ...additionalData });
+        await userDocRef.set({ displayName, email, ...additionalData });
     } catch (error) {
         console.log('error creating user in DB: ', error.message);
     }
@@ -84,13 +84,21 @@ export const convertCollectionsSnapshotToMap = (collections) => {
         };
     });
 
-    console.log(transformedCollection);
-
-    console.log('here we go');
     return transformedCollection.reduce((accumulator, collection) => {
         accumulator[collection.title.toLowerCase()] = collection;
         return accumulator;
     }, {});
+};
+
+// There is no promised based way to get a snapshot of wheather or not user exist or not
+// The only way to do this is to creating a utility checking onsnapshot auth method
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
 };
 
 export const auth = firebase.auth();
