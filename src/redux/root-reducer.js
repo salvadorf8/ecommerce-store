@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
+// persistReducer is higher order component which enhances the combineReducers() functionality to persist to localStorage
 import { persistReducer } from 'redux-persist';
-
 // below is importing the type of storage we need, below is the actual localStorage object from the window object
 import storage from 'redux-persist/lib/storage';
 

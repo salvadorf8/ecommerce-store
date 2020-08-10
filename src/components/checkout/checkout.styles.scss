@@ -1,5 +1,5 @@
 .checkout-page {
-    width: 55%;
+    width: 75%;
     min-height: 90vh;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@
             width: 23%;
 
             &:last-child {
-                width: 8%;
+                width: 10%;
             }
         }
     }
@@ -40,4 +40,20 @@
         font-size: 24px;
         color: red;
     }
+}
+
+@media screen and (max-width: 576px) {
+    //anything below 800 will get style, anything above will not
+}
+@media screen and (max-width: 768px) {
+    //anything below 800 will get style, anything above will not
+    .checkout-page {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 992px) {
+    //anything below 800 will get style, anything above will not
+}
+@media screen and (max-width: 1200px) {
+    //anything below 800 will get style, anything above will not
 }
