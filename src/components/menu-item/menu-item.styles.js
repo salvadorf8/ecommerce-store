@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const largeSetup = css`
-    height: 480px;
+    height: 380px;
 `;
 
 const getAdditionalStyles = (props) => {
@@ -12,7 +12,7 @@ const getAdditionalStyles = (props) => {
 
 export const ItemContainer = styled.div`
     min-width: 30%;
-    height: 340px;
+    height: 240px;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
@@ -30,6 +30,20 @@ export const ItemContainer = styled.div`
     }
 
     ${getAdditionalStyles}
+
+    @media screen and (max-width: 576px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 768px) {
+        //anything below 800 will get style, anything above will not
+        height: 200px;
+    }
+    @media screen and (max-width: 992px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 1200px) {
+        //anything below 800 will get style, anything above will not
+    }
 `;
 
 export const Img = styled.div`
@@ -61,6 +75,21 @@ export const Button = styled.div`
     &:hover {
         cursor: pointer;
         opacity: 0.9;
+    }
+
+    @media screen and (max-width: 576px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 768px) {
+        //anything below 800 will get style, anything above will not
+        height: 80px;
+        padding: 0 15px;
+    }
+    @media screen and (max-width: 992px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 1200px) {
+        //anything below 800 will get style, anything above will not
     }
 `;
 

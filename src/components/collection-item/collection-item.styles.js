@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CustomButton from '../custom-button/custom-button.component';
 
 export const ItemContainer = styled.div`
     width: 22vw;
@@ -17,6 +18,43 @@ export const ItemContainer = styled.div`
             opacity: 0.85;
             display: flex;
         }
+    }
+
+    @media screen and (max-width: 576px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 768px) {
+        //anything below 800 will get style, anything above will not
+        width: 40vw;
+        &:hover {
+            .image {
+                opacity: unset;
+            }
+            button {
+                opacity: unset;
+            }
+        }
+    }
+    @media screen and (max-width: 992px) {
+        //anything below 800 will get style, anything above will not
+    }
+    @media screen and (max-width: 1200px) {
+        //anything below 800 will get style, anything above will not
+    }
+`;
+
+export const AddButton = styled(CustomButton)`
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+    display: none;
+
+    @media screen and (max-width: 768px) {
+        display: block;
+        opacity: 0.9;
+        min-width: unset;
+        padding: 0 10px;
     }
 `;
 

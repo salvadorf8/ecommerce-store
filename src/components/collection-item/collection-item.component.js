@@ -12,9 +12,9 @@ const CollectionItem = ({ item, addItem }) => {
     return (
         <S.ItemContainer>
             <S.Img className='image' src={imageUrl} />
-            <CustomButton onClick={() => addItem(item)} inverted>
+            <S.AddButton onClick={() => addItem(item)} inverted>
                 Add to cart
-            </CustomButton>
+            </S.AddButton>
             <S.Content>
                 <S.Name>{name}</S.Name>
                 <S.Price>${price}</S.Price>
