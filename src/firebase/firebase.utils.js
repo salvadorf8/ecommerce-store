@@ -37,7 +37,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         try {
             await userDocRef.update({ accessed });
         } catch (error) {
-            console.log('error creating user in DB: ', error.message);
+            console.log('error updating when user logged into DB: ', error.message);
         }
 
         return userDocRef;
